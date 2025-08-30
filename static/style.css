@@ -1,0 +1,78 @@
+body {
+    font-family: 'Arial', sans-serif;   /* Sets the font for the page. Arial is used, fallback to sans-serif if Arial isn't available */
+    background: linear-gradient(to right, #77A8A8, #7E7CE);  /* Creates a gradient background from left (#77A8A8) to right (#7E7CE) */
+    margin: 0;                           /* Removes default margin around the page */
+    padding: 0;                          /* Removes default padding */
+    display: flex;                       /* Makes the body a flex container */
+    justify-content: center;             /* Centers child elements horizontally */
+    align-items: center;                 /* Centers child elements vertically */
+    height: 100vh;                       /* Sets body height to 100% of the viewport height */
+}
+
+
+.container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 400px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #77A8A8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+
+.result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+.height-group {
+    display: flex;
+    gap: 5px; /* smaller gap between input and select */
+    align-items: center;
+}
+
+.height-group input {
+    flex: 1; /* input takes most of the space */
+    padding: 8px;
+    font-size: 16px;
+}
+
+.height-group select {
+    padding: 5px;      /* smaller padding */
+    font-size: 14px;   /* smaller font */
+    width: 80px;       /* fixed small width */
+}
