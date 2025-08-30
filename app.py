@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
-import numpy as np
 import joblib
+import numpy as np
+import os
 
 app = Flask(__name__)
 
@@ -9,26 +10,32 @@ model = joblib.load("calorie_predictor.pkl")
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html')  # Your HTML form should be in templates/index.html
 
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
+        # Get form data
         age = float(request.form['age'])
-        gender = float(request.form['gender'])
+        gender = int(request.form['gender'])
         height = float(request.form['height'])
         weight = float(request.form['weight'])
         duration = float(request.form['duration'])
         heart_rate = float(request.form['heart_rate'])
         body_temp = float(request.form['body_temp'])
-        
+
+        # Prepare the input array
         input_data = np.array([[age, gender, height, weight, duration, heart_rate, body_temp]])
-        prediction = model.predict(input_data)
-        result = round(prediction[0], 2)
-    except Exception as e:
-        result = "Error: " + str(e)
+
+        # Make prediction
+        prediction = model.predict(input_data)[0]
+
+        return render_template('index.html', prediction_text=f"Estimated Calories Burned: {round(prediction, 2)} kcal")
     
-    return render_template('index.html', prediction_text=f"Calories Burned: {result}")
+    except Exception as e:
+        return render_template('index.html', prediction_text=f"Error: {str(e)}")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Use PORT environment variable provided by Render
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
